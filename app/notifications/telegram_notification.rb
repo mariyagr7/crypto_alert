@@ -1,6 +1,8 @@
+require 'telegram/bot'
+
 class TelegramNotification < BaseNotification
-  def notify(message)
-    Rails.logger.info("[Telegram] #{message}")
+  def notify(payload)
+    Rails.logger.info("[Telegram] #{payload}")
 
     token   = ENV["TG_BOT_TOKEN"]
     chat_id = ENV["TG_CHAT_ID"]
@@ -10,9 +12,8 @@ class TelegramNotification < BaseNotification
       return
     end
 
-    require 'telegram/bot'
     Telegram::Bot::Client.run(token) do |bot|
-      bot.api.send_message(chat_id: chat_id.to_i, text: message)
+      bot.api.send_message(chat_id: chat_id.to_i, text: payload["message"])
     end
 
     Rails.logger.info("TelegramNotification sent successfully to chat_id=#{chat_id}")

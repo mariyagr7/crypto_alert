@@ -40,4 +40,3 @@ class Alert < ApplicationRecord
     symbol.upcase! if symbol
   end
 end
-# Alert.create!(symbol: "BTCUSDT", threshold: 65000, direction: :up, check_interval_seconds: 30, next_check_at: Time.current)

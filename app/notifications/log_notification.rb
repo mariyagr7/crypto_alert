@@ -1,5 +1,5 @@
 class LogNotification < BaseNotification
-  def notify(message, meta: {})
-    Rails.logger.info("[LOG] #{message}")
+  def notify(payalod)
+    Rails.logger.info("[LOG] #{payalod["message"]}")
   end
 end

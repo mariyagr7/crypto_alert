@@ -11,13 +11,21 @@ RSpec.describe EmailNotification do
     }
   end
 
-  it "logs email with symbol, price and message" do
-    expect(Rails.logger).to receive(:info)
-                              .with("[EMAIL] #{payload["message"]} (#{payload["symbol"]}@#{payload["price"]})")
+  it "enqueues an email delivery job with correct parameters" do
+    ActiveJob::Base.queue_adapter = :test
 
-    mail_double = instance_double(ActionMailer::MessageDelivery, deliver_later: true)
-    allow(AlertMailer).to receive(:price_alert).and_return(mail_double)
-
-    described_class.new.notify(payload)
+    expect {
+      described_class.new.notify(payload)
+    }.to have_enqueued_job(ActionMailer::MailDeliveryJob).with(
+      "AlertMailer",
+      "price_alert",
+      "deliver_now",
+      args: [{
+               symbol: payload["symbol"],
+               price: payload["price"],
+               message: payload["message"],
+               timestamp: payload["timestamp"]
+             }]
+    )
   end
 end

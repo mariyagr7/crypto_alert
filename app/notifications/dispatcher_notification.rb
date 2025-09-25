@@ -1,7 +1,7 @@
  class DispatcherNotification
     CHANNELS = {
       telegram: TelegramNotification,
-      logs: LogNotification,
+      log: LogNotification,
       email: EmailNotification,
     }.freeze
 
@@ -13,4 +13,3 @@
       end
     end
   end
-
