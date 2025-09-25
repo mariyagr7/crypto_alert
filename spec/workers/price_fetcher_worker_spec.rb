@@ -17,7 +17,7 @@ RSpec.describe PriceFetcherWorker, type: :worker do
       "ETHUSDT" => 4200.0
     }
 
-    allow(PriceFetcher).to receive(:fetch_many).with(["BTCUSDT", "ETHUSDT"]).and_return(prices)
+    allow(PriceFetcher).to receive(:fetch_many).with([ "BTCUSDT", "ETHUSDT" ]).and_return(prices)
 
     described_class.new.perform
 
@@ -36,7 +36,7 @@ RSpec.describe PriceFetcherWorker, type: :worker do
   it "calls fetch_many with unique symbols only" do
     Alert.create!(symbol: "BTCUSDT", threshold: 70000, direction: "up", check_interval_seconds: 30, cooldown_seconds: 300)
 
-    expect(PriceFetcher).to receive(:fetch_many).with(["BTCUSDT", "ETHUSDT"]).and_return({})
+    expect(PriceFetcher).to receive(:fetch_many).with([ "BTCUSDT", "ETHUSDT" ]).and_return({})
 
     described_class.new.perform
   end

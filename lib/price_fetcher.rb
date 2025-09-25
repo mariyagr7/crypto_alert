@@ -29,7 +29,7 @@ class PriceFetcher
           data = JSON.parse(resp.body)
           data
             .select { |h| symbols.include?(h["symbol"]) }
-            .to_h { |h| [h["symbol"], h["price"].to_f] }
+            .to_h { |h| [ h["symbol"], h["price"].to_f ] }
         end
       end
     rescue => e
@@ -77,4 +77,3 @@ class PriceFetcher
     end
   end
 end
-

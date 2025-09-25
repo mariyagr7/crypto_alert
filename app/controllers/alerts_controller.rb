@@ -9,7 +9,7 @@ class AlertsController < ApplicationController
       alert.update_column(:next_check_at, Time.current)
       AlertCheckerWorker.perform_async(alert.id)
 
-      render json: { id: alert.id, status: 'ok' }, status: :created
+      render json: { id: alert.id, status: "ok" }, status: :created
     else
       render json: { errors: alert.errors.full_messages }, status: :unprocessable_entity
     end

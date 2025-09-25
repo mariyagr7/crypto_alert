@@ -10,7 +10,7 @@ RSpec.describe AlertCheckerWorker, type: :worker do
       direction: "up",
       threshold: threshold,
       cooldown_seconds: 300,
-      channels: ["log", "email", "telegram"],
+      channels: [ "log", "email", "telegram" ],
       active: true
     )
   end

@@ -6,20 +6,20 @@ RSpec.describe DispatcherNotification do
 
   it "dispatches to log channel" do
     expect_any_instance_of(LogNotification).to receive(:notify).with(message)
-    described_class.dispatch(message, channels: [:log])
+    described_class.dispatch(message, channels: [ :log ])
   end
 
   it "dispatches to email channel" do
     expect_any_instance_of(EmailNotification).to receive(:notify).with(message)
-    described_class.dispatch(message, channels: [:email])
+    described_class.dispatch(message, channels: [ :email ])
   end
 
   it "dispatches to telegram channel" do
     expect_any_instance_of(TelegramNotification).to receive(:notify).with(message)
-    described_class.dispatch(message, channels: [:telegram])
+    described_class.dispatch(message, channels: [ :telegram ])
   end
 
   it "skips unknown channels" do
-    expect { described_class.dispatch(message, channels: [:foo]) }.not_to raise_error
+    expect { described_class.dispatch(message, channels: [ :foo ]) }.not_to raise_error
   end
 end

@@ -10,7 +10,7 @@ RSpec.describe Alert, type: :model do
         direction: "up",
         check_interval_seconds: 30,
         cooldown_seconds: 300,
-        channels: ["log", "email"]
+        channels: [ "log", "email" ]
       )
       expect(alert).to be_valid
     end
@@ -46,13 +46,13 @@ RSpec.describe Alert, type: :model do
     end
 
     it "validates channels is an array" do
-      alert = Alert.new(symbol: "BTCUSDT", direction: "up", threshold: 100, channels: ["sms"])
+      alert = Alert.new(symbol: "BTCUSDT", direction: "up", threshold: 100, channels: [ "sms" ])
       expect(alert).not_to be_valid
       expect(alert.errors[:channels]).to include("includes unsupported values: sms")
     end
 
     it "validates channels includes only supported values" do
-      alert = Alert.new(symbol: "BTCUSDT", threshold: 100, direction: "up", channels: ["log", "sms"])
+      alert = Alert.new(symbol: "BTCUSDT", threshold: 100, direction: "up", channels: [ "log", "sms" ])
       expect(alert).not_to be_valid
       expect(alert.errors[:channels]).to include("includes unsupported values: sms")
     end

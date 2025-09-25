@@ -11,14 +11,14 @@ RSpec.describe NotificationSenderWorker, type: :worker do
 
   context "when channel is log" do
     it "dispatches the message to log channel" do
-      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: ["log"])
+      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: [ "log" ])
       described_class.new.perform("log", message)
     end
   end
 
   context "when channel is email" do
     it "dispatches the message to email channel" do
-      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: ["email"])
+      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: [ "email" ])
       described_class.new.perform("email", message)
     end
   end
@@ -29,7 +29,7 @@ RSpec.describe NotificationSenderWorker, type: :worker do
     end
 
     it "dispatches the message to telegram channel" do
-      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: ["telegram"])
+      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: [ "telegram" ])
       described_class.new.perform("telegram", message)
     end
 
@@ -42,7 +42,7 @@ RSpec.describe NotificationSenderWorker, type: :worker do
 
   context "when channel is unknown" do
     it "dispatches the message to unknown channel" do
-      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: ["unknown"])
+      expect(DispatcherNotification).to receive(:dispatch).with(message, channels: [ "unknown" ])
       described_class.new.perform("unknown", message)
     end
   end

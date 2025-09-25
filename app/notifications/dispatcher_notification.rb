@@ -2,7 +2,7 @@
     CHANNELS = {
       telegram: TelegramNotification,
       log: LogNotification,
-      email: EmailNotification,
+      email: EmailNotification
     }.freeze
 
     def self.dispatch(payload, channels: [])
@@ -12,4 +12,4 @@
         klass.new.notify(payload)
       end
     end
-  end
+ end

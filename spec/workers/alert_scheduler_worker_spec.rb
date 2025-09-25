@@ -12,7 +12,7 @@ RSpec.describe AlertSchedulerWorker, type: :worker do
       threshold: 65_000,
       check_interval_seconds: 30,
       cooldown_seconds: 300,
-      channels: ["log"],
+      channels: [ "log" ],
       next_check_at: 1.minute.ago,
       active: true
     )
@@ -25,7 +25,7 @@ RSpec.describe AlertSchedulerWorker, type: :worker do
       threshold: 3_000,
       check_interval_seconds: 60,
       cooldown_seconds: 300,
-      channels: ["email"],
+      channels: [ "email" ],
       next_check_at: 2.minutes.ago,
       active: true
     )
@@ -38,7 +38,7 @@ RSpec.describe AlertSchedulerWorker, type: :worker do
       threshold: 1.2,
       check_interval_seconds: 30,
       cooldown_seconds: 300,
-      channels: ["telegram"],
+      channels: [ "telegram" ],
       next_check_at: 5.minutes.from_now,
       active: true
     )

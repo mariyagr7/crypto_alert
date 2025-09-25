@@ -40,8 +40,8 @@ class TokenBucket
     now = Time.now.to_i
     allowed = Redis.current.eval(
       LUA_SCRIPT,
-      keys: [key],
-      argv: [capacity, refill, per.to_i, now]
+      keys: [ key ],
+      argv: [ capacity, refill, per.to_i, now ]
     )
     allowed == 1
   end

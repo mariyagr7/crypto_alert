@@ -20,12 +20,12 @@ RSpec.describe EmailNotification do
       "AlertMailer",
       "price_alert",
       "deliver_now",
-      args: [{
+      args: [ {
                symbol: payload["symbol"],
                price: payload["price"],
                message: payload["message"],
                timestamp: payload["timestamp"]
-             }]
+             } ]
     )
   end
 end

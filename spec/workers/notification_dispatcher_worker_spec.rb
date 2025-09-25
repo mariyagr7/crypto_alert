@@ -12,7 +12,7 @@ RSpec.describe NotificationDispatcherWorker, type: :worker do
       direction: "up",
       check_interval_seconds: 30,
       cooldown_seconds: 300,
-      channels: ["log", "email", "telegram"]
+      channels: [ "log", "email", "telegram" ]
     )
   end
 

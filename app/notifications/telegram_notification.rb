@@ -1,4 +1,4 @@
-require 'telegram/bot'
+require "telegram/bot"
 
 class TelegramNotification < BaseNotification
   def notify(payload)
