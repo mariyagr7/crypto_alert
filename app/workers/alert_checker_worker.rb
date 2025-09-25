@@ -41,7 +41,6 @@ class AlertCheckerWorker
       (alert.direction == "down" && price <= alert.threshold)
   end
 
-  # atomic: only update if cooldown has expired
   def mark_triggered!(alert, price)
     rows = Alert.where(id: alert.id)
                 .where("last_triggered_at IS NULL OR last_triggered_at <= ?", Time.current - alert.cooldown_seconds)

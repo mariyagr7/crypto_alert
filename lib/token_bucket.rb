@@ -1,4 +1,3 @@
-# lib/token_bucket.rb
 class TokenBucket
   LUA_SCRIPT = <<~LUA
     local key       = KEYS[1]
