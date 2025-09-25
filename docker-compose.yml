@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: alerts_development
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:7
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+  web:
+    build: .
+    command: bash -c "bundle exec rails s -b 0.0.0.0 -p 3000"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/alerts_development
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+  sidekiq:
+    build: .
+    command: bash -c "bundle exec sidekiq -C config/sidekiq.yml"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/alerts_development
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+volumes:
+  db_data:
+  redis_data:
