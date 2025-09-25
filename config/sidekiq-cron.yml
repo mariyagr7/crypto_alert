@@ -1,0 +1,11 @@
+# Запускает планировщик алертов каждые 30 секунд
+alert_scheduler:
+  cron: "*/30 * * * * *"
+  class: "AlertSchedulerWorker"
+  queue: alerts
+
+# Прогревает Redis ценами раз в минуту
+price_fetcher:
+  cron: "*/1 * * * *"
+  class: "PriceFetcherWorker"
+  queue: default

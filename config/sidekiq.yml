@@ -1,0 +1,26 @@
+:concurrency: 10
+:queues:
+  - [critical, 5]
+  - [default, 3]
+  - [alerts, 5]
+  - [notifications, 3]
+
+:timeout: 30
+:verbose: false
+:logfile: ./log/sidekiq.log
+
+:cron:
+  alert_scheduler:
+    cron: "*/0.5 * * * * *"   # каждые 30 секунд (sidekiq-cron поддерживает секунды)
+    class: "AlertSchedulerWorker"
+    queue: alerts
+  # Прогревает Redis ценами раз в минуту
+  price_fetcher:
+    cron: "*/1 * * * *"
+    class: "PriceFetcherWorker"
+    queue: critical
+#  :concurrency — число параллельных воркеров Sidekiq.
+#  :queues — список очередей с приоритетом [name, weight].
+#  :cron — задания через sidekiq-cron gem, где class — класс воркера, queue — целевая очередь, cron — расписание.
+#  PricePollerWorker → каждые 10 секунд.
+#  SchedulerWorker → каждые 30 секунд.
