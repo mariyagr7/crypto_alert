@@ -24,8 +24,6 @@ gem 'redis'
 gem "httparty"
 gem "faraday"
 gem 'faraday-retry'
-gem 'telegram-bot-ruby'
-gem 'dotenv-rails', groups: [:development, :test]
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
@@ -59,6 +57,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem 'dotenv-rails'
+  gem "telegram-bot-ruby"
 end
 
 group :development do
